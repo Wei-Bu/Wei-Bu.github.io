@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
+    <title>Wei Bu - Portfolio</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,19 +13,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 
+    <!-- KaTeX for LaTeX Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsNIU0KOVEMckCWLqmGNEYROJytOaOFwl0Vvr/BFnvqAaIlKmsENQTsyBI" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmImMN2hjo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
     <style>
-        /* Custom styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* gray-50 */
-        }
-        .dark body {
-            background-color: #020617; /* slate-950 */
-        }
-        /* Style for the modal */
-        #blogModal {
-            transition: opacity 0.3s ease;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .dark body { background-color: #020617; }
+        #blogModal { transition: opacity 0.3s ease; }
     </style>
 </head>
 <body class="text-slate-800 dark:text-slate-200">
@@ -33,86 +29,99 @@
     <!-- Header / Navigation -->
     <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800">
         <nav class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-slate-900 dark:text-white">Your Name</a>
+            <a href="#" class="text-xl font-bold text-slate-900 dark:text-white">Wei Bu</a>
             <div class="flex items-center space-x-4 md:space-x-6 text-sm font-medium">
                 <a href="#about" class="hover:text-sky-500 transition-colors">About</a>
-                <a href="#projects" class="hover:text-sky-500 transition-colors">Projects</a>
+                <a href="#publications" class="hover:text-sky-500 transition-colors">Publications</a>
                 <a href="#blog" class="hover:text-sky-500 transition-colors">Blog</a>
-                <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
-                    <!-- Icons will be injected by JS -->
-                </button>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"></button>
             </div>
         </nav>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-8 md:py-16">
 
-        <!-- About / CV Section -->
+        <!-- ======================================================= -->
+        <!-- PERSONAL INFO SECTION -->
+        <!-- ======================================================= -->
         <section id="about" class="flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-24">
             <div class="w-48 h-48 md:w-60 md:h-60 flex-shrink-0">
-                <img src="https://placehold.co/240x240/e2e8f0/334155?text=You" alt="Your Name" class="rounded-full w-full h-full object-cover border-4 border-white dark:border-slate-800 shadow-lg">
+                <img src="https://placehold.co/240x240/e2e8f0/334155?text=WB" alt="Wei Bu" class="rounded-full w-full h-full object-cover border-4 border-white dark:border-slate-800 shadow-lg">
             </div>
             <div>
-                <h1 class="text-4xl md:text-5xl font-extrabold mb-2 text-slate-900 dark:text-white">Hi, I'm [Your Name]</h1>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-2 text-slate-900 dark:text-white">Hi, I'm Wei Bu</h1>
                 <p class="text-lg text-slate-600 dark:text-slate-400 mb-4">
-                    I'm a passionate software developer with a focus on creating elegant, efficient solutions. I specialize in [Your Specialty, e.g., web development, machine learning] and love tackling complex problems.
+                    Researcher with strong analytical and problem-solving skills, a deep background in theoretical physics, and a passion for AI. Experienced in high-level mathematical modeling and excited about applying physics-inspired insights to machine learning.
                 </p>
                 <div class="flex items-center gap-4 mt-6">
-                    <a href="path/to/your/cv.pdf" download class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-6 rounded-lg transition-transform transform hover:scale-105">
+                    <!-- To make this work, upload your CV as "CV_Wei-Bu.pdf" to your GitHub repository -->
+                    <a href="./CV_Wei-Bu.pdf" download class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-6 rounded-lg transition-transform transform hover:scale-105">
                         Download CV
                     </a>
                     <div class="flex items-center gap-4">
-                        <a href="#" class="text-slate-500 hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        </a>
-                        <a href="#" class="text-slate-500 hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        <!-- Add your social media links -->
+                        <a href="#" class="text-slate-500 hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-400" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                        <a href="#" class="text-slate-500 hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-400" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                        <a href="https://scholar.google.com/citations?hl=en&user=OWqfLxgAAAAJ" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-400" aria-label="Google Scholar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M5.242 13.769L0 9.5L12 0l12 9.5l-5.242 4.269C17.548 11.249 14.978 9 12 9s-5.548 2.249-6.758 4.769zM12 10c-3.313 0-6 2.687-6 6s2.687 6 6 6s6-2.687 6-6s-2.687-6-6-6z"/></svg>
                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="mb-24">
-            <h2 class="text-3xl font-bold text-center mb-12 text-slate-900 dark:text-white">My Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1 -->
-                <div class="bg-white dark:bg-slate-800/50 rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform">
-                    <img src="https://placehold.co/600x400/0ea5e9/white?text=Project+Alpha" class="w-full h-48 object-cover" alt="Project Alpha">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Project Alpha</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">A machine learning model to predict stock market trends. Built with Python & TensorFlow.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Python</span>
-                            <span class="bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">TensorFlow</span>
-                        </div>
-                        <div class="flex gap-4">
-                            <a href="#" class="text-sky-500 font-medium hover:underline">Live Demo</a>
-                            <a href="#" class="text-sky-500 font-medium hover:underline">GitHub</a>
-                        </div>
-                    </div>
+        <!-- ======================================================= -->
+        <!-- PUBLICATIONS SECTION -->
+        <!-- ======================================================= -->
+        <section id="publications" class="mb-24">
+            <h2 class="text-3xl font-bold text-center mb-12 text-slate-900 dark:text-white">Featured Publications</h2>
+            <div class="space-y-6">
+                <!-- Publication 1 -->
+                <div class="bg-white dark:bg-slate-800/50 rounded-lg shadow-sm p-6 border border-slate-200 dark:border-slate-800">
+                    <h3 class="text-lg font-bold">
+                        <a href="https://arxiv.org/abs/2501.09659" target="_blank" rel="noopener noreferrer" class="hover:text-sky-500 hover:underline">From Fokker-Planck to Callan-Symanznik: Evolution of weight matrices under training</a>
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Bu, Wei and Kol, Uri and Liu, Ziming</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-500 mt-2">2501.09659, 2025</p>
                 </div>
-                <!-- Add more project cards as needed -->
+                <!-- Publication 2 -->
+                <div class="bg-white dark:bg-slate-800/50 rounded-lg shadow-sm p-6 border border-slate-200 dark:border-slate-800">
+                    <h3 class="text-lg font-bold">
+                        <a href="https://arxiv.org/abs/2412.00918" target="_blank" rel="noopener noreferrer" class="hover:text-sky-500 hover:underline">2d theory for asymptotic dynamics of 4d (self-dual) Einstein gravity</a>
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Bu, Wei and Seet, Sean</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-500 mt-2">2412.00918, 2024</p>
+                </div>
+                <!-- Publication 3 -->
+                <div class="bg-white dark:bg-slate-800/50 rounded-lg shadow-sm p-6 border border-slate-200 dark:border-slate-800">
+                    <h3 class="text-lg font-bold">
+                        <a href="https://arxiv.org/abs/2310.17457" target="_blank" rel="noopener noreferrer" class="hover:text-sky-500 hover:underline">A hidden 2d CFT for self-dual Yang-Mills on the celestial sphere</a>
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Bu, Wei and Seet, Sean</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-500 mt-2">2310.17457, 2023</p>
+                </div>
             </div>
         </section>
-
-        <!-- Blog Section -->
+        
+        <!-- ======================================================= -->
+        <!-- BLOG SECTION -->
+        <!-- The content is in the <script> tag at the bottom -->
+        <!-- ======================================================= -->
         <section id="blog">
             <h2 class="text-3xl font-bold text-center mb-12 text-slate-900 dark:text-white">From My Blog</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Blog Post Card 1 -->
                 <div class="blog-post-card bg-white dark:bg-slate-800/50 rounded-lg shadow-md overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-transform" data-id="1">
-                    <img src="https://placehold.co/600x300/f59e0b/white?text=Algorithms" class="w-full h-48 object-cover" alt="Blog Post 1">
+                    <img src="https://placehold.co/600x300/10b981/white?text=LaTeX" class="w-full h-48 object-cover" alt="Blog Post 1">
                     <div class="p-6">
                         <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">July 30, 2025</p>
-                        <h3 class="text-xl font-bold mb-2">A New Algorithm for Fast Sorting</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Exploring a novel sorting algorithm that outperforms traditional methods in specific scenarios...</p>
+                        <h3 class="text-xl font-bold mb-2">Understanding Euler's Identity</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">A deep dive into one of the most beautiful equations in mathematics, using LaTeX for clarity...</p>
                     </div>
                 </div>
                 <!-- Blog Post Card 2 -->
                 <div class="blog-post-card bg-white dark:bg-slate-800/50 rounded-lg shadow-md overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-transform" data-id="2">
-                    <img src="https://placehold.co/600x300/10b981/white?text=React" class="w-full h-48 object-cover" alt="Blog Post 2">
+                    <img src="https://placehold.co/600x300/f43f5e/white?text=React" class="w-full h-48 object-cover" alt="Blog Post 2">
                     <div class="p-6">
                         <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">July 15, 2025</p>
                         <h3 class="text-xl font-bold mb-2">Building a Reusable React Component Library</h3>
@@ -128,51 +137,50 @@
         <div class="bg-white dark:bg-slate-900 rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
             <div class="sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
                 <h2 id="modal-title" class="text-2xl font-bold"></h2>
-                <button onclick="closeModal()" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700">&times;</button>
+                <button onclick="closeModal()" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 text-2xl leading-none">&times;</button>
             </div>
-            <div id="modal-content" class="p-6 prose dark:prose-invert max-w-none">
-                <!-- Content will be injected by JS -->
-            </div>
+            <div id="modal-content" class="p-6 prose dark:prose-invert max-w-none"></div>
         </div>
     </div>
 
     <footer class="text-center py-8 mt-16 border-t border-slate-200 dark:border-slate-800">
-        <p class="text-sm text-slate-500 dark:text-slate-400">&copy; 2025 Your Name. All rights reserved.</p>
+        <p class="text-sm text-slate-500 dark:text-slate-400">&copy; 2025 Wei Bu. All rights reserved.</p>
     </footer>
 
     <script>
-        // --- Blog Post Data ---
-        // In a real application, you would fetch this from a CMS or Markdown files.
+        // --- EDIT YOUR BLOG POSTS HERE ---
         const blogPosts = {
             '1': {
-                title: 'A New Algorithm for Fast Sorting',
+                title: "Understanding Euler's Identity",
                 content: `
-                    <p class="lead">In this post, we explore a novel sorting algorithm that outperforms traditional methods in specific scenarios. We will dive deep into its implementation and benchmark its performance against QuickSort and MergeSort.</p>
-                    <h3 class="text-xl font-bold mt-6 mb-2">The Core Concept</h3>
-                    <p>Our new algorithm, which we'll call "QuantumSort", leverages principles of... (imagine a detailed explanation here). It works best on partially sorted arrays or data with low cardinality.</p>
-                    <pre class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg overflow-x-auto my-4"><code class="language-js">
-function quantumSort(arr) {
-  // ... implementation details ...
-  console.log('Sorting with QuantumSort!');
-  return arr;
-}
-                    </code></pre>
-                    <p>As you can see, the implementation is surprisingly concise. The real magic happens in the pre-processing step, where we analyze the data distribution.</p>
+                    <p>Euler's identity is often called the most beautiful equation in mathematics. It connects five fundamental mathematical constants in a single, elegant formula:</p>
+                    $$ e^{i\pi} + 1 = 0 $$
+                    <p>Let's break it down. It involves:</p>
+                    <ul>
+                        <li>$e$, Euler's number, the base of natural logarithms.</li>
+                        <li>$i$, the imaginary unit, which satisfies $i^2 = -1$.</li>
+                        <li>$\pi$, the ratio of a circle's circumference to its diameter.</li>
+                        <li>$1$, the multiplicative identity.</li>
+                        <li>$0$, the additive identity.</li>
+                    </ul>
+                    <p>The proof stems from Euler's formula, which states that for any real number $x$, $e^{ix} = \cos(x) + i\sin(x)$. If we substitute $x = \pi$, we get:</p>
+                    $$ e^{i\pi} = \cos(\pi) + i\sin(\pi) $$
+                    <p>Since $\cos(\pi) = -1$ and $\sin(\pi) = 0$, the equation simplifies to $e^{i\pi} = -1$, which rearranges to the famous identity.</p>
                 `
             },
             '2': {
                 title: 'Building a Reusable React Component Library',
                 content: `
-                    <p class="lead">Building a component library is a rite of passage for many frontend developers. It forces you to think about reusability, API design, and documentation. This post will guide you through the process.</p>
+                    <p>Building a component library is a rite of passage for many frontend developers. It forces you to think about reusability, API design, and documentation.</p>
                     <h3 class="text-xl font-bold mt-6 mb-2">Step 1: Atomic Design</h3>
                     <p>We'll start with the principles of Atomic Design, breaking down our UI into atoms, molecules, organisms, templates, and pages. This creates a clear hierarchy and promotes consistency.</p>
-                    <img src="https://placehold.co/600x300/10b981/white?text=Component+Structure" alt="Component Structure" class="rounded-lg my-4" />
+                    <img src="https://placehold.co/600x300/f43f5e/white?text=Component+Structure" alt="Component Structure" class="rounded-lg my-4" />
                     <p>This structured approach makes your library intuitive for other developers to use.</p>
                 `
             }
         };
 
-        // --- Modal Logic ---
+        // --- Modal & LaTeX Rendering Logic ---
         const modal = document.getElementById('blogModal');
         const modalTitle = document.getElementById('modal-title');
         const modalContent = document.getElementById('modal-content');
@@ -184,9 +192,16 @@ function quantumSort(arr) {
                 if (post) {
                     modalTitle.textContent = post.title;
                     modalContent.innerHTML = post.content;
+                    // Render LaTeX after content is set
+                    renderMathInElement(modalContent, {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false},
+                        ]
+                    });
                     modal.classList.remove('hidden');
                     modal.classList.add('flex');
-                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    document.body.style.overflow = 'hidden';
                 }
             });
         });
@@ -194,7 +209,7 @@ function quantumSort(arr) {
         function closeModal() {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
 
         // --- Dark Mode Toggle ---
@@ -211,17 +226,13 @@ function quantumSort(arr) {
                 themeToggle.innerHTML = moonIcon;
             }
         };
-
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'light' : 'dark');
             applyTheme(isDark ? 'light' : 'dark');
         });
-
-        // Apply theme on initial load
         const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         applyTheme(savedTheme);
-
     </script>
 </body>
 </html>
