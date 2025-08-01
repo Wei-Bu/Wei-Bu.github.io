@@ -79,7 +79,7 @@
                 <!-- Publication 1 -->
                 <div class="bg-white dark:bg-slate-800/50 rounded-lg shadow-sm p-6 border border-slate-200 dark:border-slate-800">
                     <h3 class="text-lg font-bold">
-                        <a href="https://arxiv.org/abs/2501.09659" target="_blank" rel="noopener noreferrer" class="hover:text-sky-500 hover:underline">From Fokker-Planck to Callan-Symanznik: Evolution of weight matrices under training</a>
+                        <a href="https://arxiv.org/abs/2501.09659" target="_blank" rel="noopener noreferrer" class="hover:text-sky-500 hover:underline">From Fokker-Planck to Callan-Symanzik: Evolution of weight matrices under training</a>
                     </h3>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Bu, Wei and Kol, Uri and Liu, Ziming</p>
                     <p class="text-sm text-slate-500 dark:text-slate-500 mt-2">2501.09659, 2025</p>
@@ -109,7 +109,7 @@
         <!-- ======================================================= -->
         <section id="blog">
             <h2 class="text-3xl font-bold text-center mb-12 text-slate-900 dark:text-white">From My Blog</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Blog Post Card 1 -->
                 <div class="blog-post-card bg-white dark:bg-slate-800/50 rounded-lg shadow-md overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-transform" data-id="1">
                     <img src="https://placehold.co/600x300/10b981/white?text=LaTeX" class="w-full h-48 object-cover" alt="Blog Post 1">
@@ -128,13 +128,22 @@
                         <p class="text-sm text-slate-600 dark:text-slate-400">Best practices for creating a flexible, scalable, and maintainable component library in React...</p>
                     </div>
                 </div>
+                <!-- NEW Blog Post Card 3 - ICL -->
+                <div class="blog-post-card bg-white dark:bg-slate-800/50 rounded-lg shadow-md overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-transform" data-id="3">
+                    <img src="https://placehold.co/600x300/8b5cf6/white?text=AI+Brain" class="w-full h-48 object-cover" alt="ICL Blog Post">
+                    <div class="p-6">
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">August 1, 2025</p>
+                        <h3 class="text-xl font-bold mb-2">How AI Models Learn Without Training: The Magic of ICL</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Discover how ChatGPT learns new tasks from examples - and how this fulfills Geoffrey Hinton's decades-old dream...</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- Blog Post Modal -->
     <div id="blogModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4" onclick="closeModal()">
-        <div class="bg-white dark:bg-slate-900 rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+        <div class="bg-white dark:bg-slate-900 rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
             <div class="sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
                 <h2 id="modal-title" class="text-2xl font-bold"></h2>
                 <button onclick="closeModal()" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 text-2xl leading-none">&times;</button>
@@ -176,6 +185,146 @@
                     <p>We'll start with the principles of Atomic Design, breaking down our UI into atoms, molecules, organisms, templates, and pages. This creates a clear hierarchy and promotes consistency.</p>
                     <img src="https://placehold.co/600x300/f43f5e/white?text=Component+Structure" alt="Component Structure" class="rounded-lg my-4" />
                     <p>This structured approach makes your library intuitive for other developers to use.</p>
+                `
+            },
+            '3': {
+                title: 'How AI Models Learn Without Training: The Magic of ICL',
+                content: `
+                    <p class="text-lg font-medium text-slate-700 dark:text-slate-300 mb-6">Have you ever wondered how ChatGPT can suddenly become a French translator, a code debugger, or a creative writer just by seeing a few examples? The answer lies in a fascinating phenomenon called <strong>In-Context Learning (ICL)</strong> - and it's the fulfillment of a decades-old dream by AI pioneer Geoffrey Hinton.</p>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">The Magic Trick</h2>
+                    <p>Imagine you're a master chef, but instead of learning new recipes through years of practice, you could instantly adapt your cooking style just by watching someone make a dish once. That's essentially what large language models do with In-Context Learning.</p>
+                    
+                    <div class="bg-blue-50 dark:bg-slate-800 p-4 rounded-lg my-6">
+                        <p><strong>Example:</strong> You show ChatGPT:</p>
+                        <p class="font-mono text-sm mt-2">
+                        🍎 Apple → Red<br>
+                        🍌 Banana → Yellow<br>
+                        🍊 Orange → ?
+                        </p>
+                        <p class="mt-2">And it immediately understands: "Ah, you want me to map fruits to their colors!" and responds with "Orange."</p>
+                    </div>
+
+                    <p>No retraining. No gradient updates. No backpropagation. The model just <em>gets it</em> from the context.</p>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Hinton's Decades-Old Dream</h2>
+                    <p>Back around 2016, Geoffrey Hinton (the "Godfather of AI") had a revolutionary idea. He believed neural networks needed <strong>two timescales</strong>:</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                        <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                            <h4 class="font-bold text-green-800 dark:text-green-300">🐌 Slow Weights</h4>
+                            <p class="text-sm mt-2">Learned during training over millions of examples. Like your core knowledge and skills.</p>
+                        </div>
+                        <div class="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+                            <h4 class="font-bold text-orange-800 dark:text-orange-300">⚡ Fast Weights</h4>
+                            <p class="text-sm mt-2">Adapted instantly for each new input. Like your ability to quickly adjust to new situations.</p>
+                        </div>
+                    </div>
+
+                    <p>The idea was brilliant: $W_{total} = W_{slow} + W_{fast}(x)$, where different inputs would get different "fast weights" added to the base "slow weights."</p>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">The Computational Nightmare</h3>
+                    <p>But there was a massive problem. Here's what Hinton's vision would require:</p>
+                    
+                    <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg my-4 font-mono text-sm">
+                        # Hinton's dream (computationally expensive):<br>
+                        for each input x_i in batch:<br>
+                        &nbsp;&nbsp;W_fast_i = compute_fast_weights(x_i)<br>
+                        &nbsp;&nbsp;W_total_i = W_slow + W_fast_i<br>
+                        &nbsp;&nbsp;y_i = W_total_i @ x_i  # Can't batch this!
+                    </div>
+
+                    <p>Every input needs different weights, so you can't use efficient batch processing. It would be <strong>impossibly slow</strong>.</p>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">How Transformers Solved the Impossible</h2>
+                    <p>Here's where the story gets beautiful. Transformers found an elegant way to achieve Hinton's dream without the computational nightmare.</p>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">The Attention Breakthrough</h3>
+                    <p>Instead of changing the weights directly, transformers change <strong>what the weights act on</strong>. It's like instead of getting a new hammer for each nail, you reshape the nail so your existing hammer works perfectly.</p>
+
+                    <div class="bg-blue-50 dark:bg-slate-800 p-4 rounded-lg my-6">
+                        <h4 class="font-bold mb-2">The Mathematical Magic:</h4>
+                        <p>Instead of: $y = (W_{slow} + W_{fast}(x)) \cdot x$</p>
+                        <p>Transformers do: $y = W_{slow} \cdot \text{attention}(x, \text{context})$</p>
+                        <p class="text-sm mt-2 text-slate-600 dark:text-slate-400">Same effect, but the attention mechanism is efficiently batchable!</p>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">The Secret: Polynomial Feature Magic</h2>
+                    <p>Here's where it gets really deep. Our mathematical analysis reveals that ICL is secretly operating in a <strong>lifted polynomial feature space</strong>.</p>
+
+                    <p>When you give a model examples like:</p>
+                    <ul class="my-4">
+                        <li>"cat" → "animal" </li>
+                        <li>"dog" → "animal"</li>
+                        <li>"rose" → ?</li>
+                    </ul>
+
+                    <p>The model isn't just pattern matching. It's:</p>
+                    <ol class="list-decimal list-inside my-4 space-y-2">
+                        <li><strong>Lifting your input</strong> to a high-dimensional polynomial feature space: $x \mapsto [1, x_1, x_2, x_1^2, x_1x_2, x_2^2, ...]$</li>
+                        <li><strong>Using context to determine</strong> which polynomial combinations matter: $h = A(C) \cdot \text{features}(x)$</li>
+                        <li><strong>Effectively modifying the weights</strong> to: $\tilde{W}(C) = W \cdot A(C)$</li>
+                    </ol>
+
+                    <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg my-6">
+                        <p class="font-bold text-purple-800 dark:text-purple-300">🎯 Key Insight:</p>
+                        <p class="text-sm mt-2">ICL has access to polynomial interactions (like $x_i \cdot x_j$) that regular gradient descent can't reach. That's why it can learn patterns that would be impossible with traditional training!</p>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Beyond Hinton's Wildest Dreams</h2>
+                    <p>Not only did transformers fulfill Hinton's vision - they exceeded it:</p>
+
+                    <div class="overflow-x-auto my-6">
+                        <table class="min-w-full text-sm">
+                            <tr class="border-b">
+                                <th class="text-left p-2 font-bold">Hinton's Vision</th>
+                                <th class="text-left p-2 font-bold">ICL Reality</th>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-2">Fast weights per input</td>
+                                <td class="p-2">Fast <em>architecture</em> per context ✨</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-2">Linear adaptation</td>
+                                <td class="p-2">Nonlinear through polynomial lifting 🚀</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-2">Computational bottleneck</td>
+                                <td class="p-2">Efficiently batchable 💨</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2">Fixed feature space</td>
+                                <td class="p-2">Dynamic feature expansion 🎯</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Why This Matters</h2>
+                    <p>Understanding ICL reveals something profound about intelligence itself. It's not just about memorizing patterns - it's about <strong>dynamic architecture reconfiguration</strong>.</p>
+
+                    <p>When you show ChatGPT a few examples, you're not just giving it data. You're:</p>
+                    <ul class="my-4 space-y-1">
+                        <li>🔧 <strong>Reconfiguring its computational pathways</strong></li>
+                        <li>🎨 <strong>Activating specific polynomial feature combinations</strong></li>
+                        <li>🎯 <strong>Creating a task-specific neural architecture on the fly</strong></li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">The Future</h2>
+                    <p>We've only scratched the surface. Future AI systems might:</p>
+                    <ul class="my-4 space-y-2">
+                        <li><strong>Explicit fast weights:</strong> Direct implementation of Hinton's vision with better hardware</li>
+                        <li><strong>Hybrid approaches:</strong> Combine attention with explicit weight modulation</li>
+                        <li><strong>Meta-architectures:</strong> Learn to modify entire network structures, not just weights</li>
+                    </ul>
+
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 p-6 rounded-lg my-8">
+                        <p class="font-bold text-lg">🎉 The Bottom Line</p>
+                        <p class="mt-2">Hinton's dream of fast and slow weights wasn't just fulfilled - it was <strong>revolutionized</strong>. Transformers found a way to achieve rapid adaptation that's more powerful, more efficient, and more elegant than anyone imagined.</p>
+                        <p class="mt-2 text-sm italic">And that's why ChatGPT can learn to be a poet, programmer, or philosopher just from a few examples. It's not magic - it's mathematics. Beautiful, deep mathematics.</p>
+                    </div>
+
+                    <hr class="my-8">
+                    <p class="text-sm text-slate-600 dark:text-slate-400"><em>Want to dive deeper into the mathematics? Check out the rigorous derivations in our technical papers on polynomial feature lifting and kernel space analysis of attention mechanisms.</em></p>
                 `
             }
         };
