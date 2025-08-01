@@ -177,14 +177,207 @@
                     <p>Since $\cos(\pi) = -1$ and $\sin(\pi) = 0$, the equation simplifies to $e^{i\pi} = -1$, which rearranges to the famous identity.</p>
                 `
             },
-            '2': {
-                title: 'Building a Reusable React Component Library',
+            '3': {
+                title: 'ICL: Fast Weights Through Kernel Space',
                 content: `
-                    <p>Building a component library is a rite of passage for many frontend developers. It forces you to think about reusability, API design, and documentation.</p>
-                    <h3 class="text-xl font-bold mt-6 mb-2">Step 1: Atomic Design</h3>
-                    <p>We'll start with the principles of Atomic Design, breaking down our UI into atoms, molecules, organisms, templates, and pages. This creates a clear hierarchy and promotes consistency.</p>
-                    <img src="https://placehold.co/600x300/f43f5e/white?text=Component+Structure" alt="Component Structure" class="rounded-lg my-4" />
-                    <p>This structured approach makes your library intuitive for other developers to use.</p>
+                    <h2 class="text-2xl font-bold mt-6 mb-4">The Problem Hinton Identified</h2>
+                    <p>Back in 2016, Geoffrey Hinton had this brilliant insight: neural networks should have two timescales of adaptation. Most weights should change slowly during training, but some should adapt quickly for each input.</p>
+                    
+                    <p>His idea was simple. Instead of just:</p>
+                    $y = W x$
+                    
+                    <p>We should have:</p>
+                    $y = (W_{\\text{slow}} + W_{\\text{fast}}(x)) x$
+                    
+                    <p>where $W_{\\text{slow}} \\in \\mathbb{R}^{d \\times d}$ are learned during training, and $W_{\\text{fast}}(x) \\in \\mathbb{R}^{d \\times d}$ adapt instantly based on input $x$.</p>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">The Computational Nightmare</h3>
+                    <p>But here's the problem. With regular weights, you can batch process:</p>
+                    $Y = W \\cdot X$
+                    <p>where $X \\in \\mathbb{R}^{d \\times B}$ is a batch of $B$ inputs. One matrix multiplication handles everything.</p>
+                    
+                    <p>With fast weights, you can't batch:</p>
+                    $y_i = (W_{\\text{slow}} + W_{\\text{fast}}(x_i)) x_i \\quad \\text{for each } i$
+                    
+                    <p>Each input needs its own weight matrix. No parallelization. Computationally dead.</p>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Enter Linear Attention</h2>
+                    <p>Let's see how linear attention works mathematically. For query $x \\in \\mathbb{R}^d$ and context $C = \\{c_1, c_2, \\ldots, c_k\\}$ where $c_i \\in \\mathbb{R}^d$:</p>
+
+                    $h = \\frac{\\sum_{i=0}^k \\alpha_i(x) v_i}{\\sum_{i=0}^k \\alpha_i(x)}$
+
+                    <p>where:</p>
+                    $\\alpha_0(x) = x^T W_Q^T W_K x \\quad \\text{(self-attention weight)}$
+                    $\\alpha_i(x) = x^T W_Q^T W_K c_i \\quad \\text{(context attention weights)}$
+                    $v_0 = x W_V, \\quad v_i = c_i W_V$
+
+                    <p>Let's check dimensions. If $x \\in \\mathbb{R}^d$, then:</p>
+                    <ul>
+                        <li>$W_Q, W_K \\in \\mathbb{R}^{d \\times d_k}$</li>
+                        <li>$W_V \\in \\mathbb{R}^{d \\times d_v}$</li>
+                        <li>$\\alpha_i(x) \\in \\mathbb{R}$ (scalars)</li>
+                        <li>$v_i \\in \\mathbb{R}^{d_v}$</li>
+                        <li>$h \\in \\mathbb{R}^{d_v}$</li>
+                    </ul>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">This Produces Rational Functions!</h3>
+                    <p>Notice that $h$ is a rational function of $x$:</p>
+                    $h = \\frac{\\text{polynomial in } x}{\\text{polynomial in } x}$
+
+                    <p>The numerator is:</p>
+                    $\\text{num} = (x^T W_Q^T W_K x)(x W_V) + \\sum_{i=1}^k (x^T W_Q^T W_K c_i)(c_i W_V)$
+
+                    <p>This is degree-3 polynomial in $x$ (the first term $x^T M x \\cdot x = x^T M x x$ is cubic).</p>
+
+                    <p>The denominator is:</p>
+                    $\\text{den} = x^T W_Q^T W_K x + \\sum_{i=1}^k x^T W_Q^T W_K c_i$
+
+                    <p>This is degree-2 polynomial in $x$.</p>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">The Kernel Space Trick</h2>
+                    <p>Here's the key insight. To make this linear, we lift $x$ to polynomial feature space:</p>
+                    $\\mathbf{T}(x) = [1, x_1, x_2, \\ldots, x_1^2, x_1x_2, \\ldots, x_1^3, x_1^2x_2, \\ldots]^T$
+
+                    <p>For $x \\in \\mathbb{R}^d$ with degree-$N$ polynomials:</p>
+                    $\\mathbf{T}(x) \\in \\mathbb{R}^D \\quad \\text{where } D = \\binom{d+N}{N}$
+
+                    <p>For degree-3 polynomials in $\\mathbb{R}^2$:</p>
+                    $\\mathbf{T}(x) = [1, x_1, x_2, x_1^2, x_1x_2, x_2^2, x_1^3, x_1^2x_2, x_1x_2^2, x_2^3]^T \\in \\mathbb{R}^{10}$
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">Polynomial Approximation</h3>
+                    <p>Now we can approximate the rational function:</p>
+                    $h \\approx A(C) \\cdot \\mathbf{T}(x)$
+
+                    <p>where $A(C) \\in \\mathbb{R}^{d_v \\times D}$ is the context-dependent polynomial coefficient matrix.</p>
+
+                    <p>Let's check dimensions:</p>
+                    <ul>
+                        <li>$A(C) \\in \\mathbb{R}^{d_v \\times D}$</li>
+                        <li>$\\mathbf{T}(x) \\in \\mathbb{R}^D$</li>
+                        <li>$A(C) \\cdot \\mathbf{T}(x) \\in \\mathbb{R}^{d_v}$ ✓</li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">The Fast Weight Realization</h2>
+                    <p>Now consider the MLP that follows attention:</p>
+                    $f(x, C) = W_2 \\sigma(W_1 h + b_1) + b_2$
+
+                    <p>Substituting our approximation:</p>
+                    $f(x, C) = W_2 \\sigma(W_1 A(C) \\mathbf{T}(x) + b_1) + b_2$
+
+                    <p>Define the <strong>context-modified weight</strong>:</p>
+                    $\\tilde{W}_1(C) = W_1 A(C)$
+
+                    <p>Then:</p>
+                    $f(x, C) = W_2 \\sigma(\\tilde{W}_1(C) \\mathbf{T}(x) + b_1) + b_2$
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">Dimensional Analysis</h3>
+                    <p>Let's verify all dimensions work:</p>
+                    <ul>
+                        <li>$W_1 \\in \\mathbb{R}^{d_{\\text{hidden}} \\times d_v}$ (original MLP weight)</li>
+                        <li>$A(C) \\in \\mathbb{R}^{d_v \\times D}$ (polynomial coefficients)</li>
+                        <li>$\\tilde{W}_1(C) = W_1 A(C) \\in \\mathbb{R}^{d_{\\text{hidden}} \\times D}$ (modified weight)</li>
+                        <li>$\\mathbf{T}(x) \\in \\mathbb{R}^D$ (polynomial features)</li>
+                        <li>$\\tilde{W}_1(C) \\mathbf{T}(x) \\in \\mathbb{R}^{d_{\\text{hidden}}}$ ✓</li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Hinton's Dream Realized</h2>
+                    <p>Look what we've achieved! We have:</p>
+                    $\\tilde{W}_1(C) = W_1 A(C)$
+
+                    <p>This is exactly Hinton's vision:</p>
+                    <ul>
+                        <li><strong>Slow weights</strong>: $W_1$ (learned during pretraining)</li>
+                        <li><strong>Fast weights</strong>: $A(C)$ (context-dependent modification)</li>
+                        <li><strong>Total effect</strong>: $\\tilde{W}_1(C)$ combines both</li>
+                    </ul>
+
+                    <p>But instead of $W_{\\text{slow}} + W_{\\text{fast}}(x)$, we have $W_{\\text{slow}} \\cdot A_{\\text{fast}}(C)$.</p>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">Why This Solves the Computational Problem</h3>
+                    <p>The genius is that attention computes $A(C)$ efficiently:</p>
+
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li><strong>Parallel attention computation</strong>: $\\text{softmax}(QK^T/\\sqrt{d})$ for all positions simultaneously</li>
+                        <li><strong>Batch-friendly</strong>: Same attention weights applied across batch dimension</li>
+                        <li><strong>Hardware optimized</strong>: Standard matrix operations</li>
+                    </ol>
+
+                    <p>Instead of:</p>
+                    <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm">
+# Hinton's original (slow):
+for i, x_i in enumerate(batch):
+    W_fast_i = compute_fast_weights(x_i)
+    y_i = (W_slow + W_fast_i) @ x_i
+                    </pre>
+
+                    <p>Transformers do:</p>
+                    <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm">
+# ICL (fast):
+A = attention(Q, K, V)  # Batched
+H = A @ V              # Batched  
+Y = W_slow @ H         # Batched
+                    </pre>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Concrete Example</h2>
+                    <p>Let's work through a 2D example. Suppose $x = [x_1, x_2]^T$ and we use degree-2 features:</p>
+                    $\\mathbf{T}(x) = [1, x_1, x_2, x_1^2, x_1x_2, x_2^2]^T$
+
+                    <p>Context $C = \\{c_1\\}$ where $c_1 = [1, 0]^T$. The attention computation gives:</p>
+                    $\\alpha_0(x) = x^T W_Q^T W_K x = x_1^2 + x_2^2 \\quad \\text{(assuming } W_Q^T W_K = I\\text{)}$
+                    $\\alpha_1(x) = x^T W_Q^T W_K c_1 = x_1$
+
+                    <p>So:</p>
+                    $h = \\frac{(x_1^2 + x_2^2) \\cdot x W_V + x_1 \\cdot c_1 W_V}{x_1^2 + x_2^2 + x_1}$
+
+                    <p>This rational function gets approximated as:</p>
+                    $h \\approx [a_0(C), a_1(C), a_2(C), a_3(C), a_4(C), a_5(C)] \\cdot [1, x_1, x_2, x_1^2, x_1x_2, x_2^2]^T$
+
+                    <p>The coefficients $a_i(C)$ depend on the context through the specific form of the rational function.</p>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Beyond Hinton's Vision</h2>
+                    <p>ICL actually exceeds Hinton's original dream in several ways:</p>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">1. Exponentially More Parameters</h3>
+                    <p>Original space: $W_1 \\in \\mathbb{R}^{d_{\\text{hidden}} \\times d_v}$ has $d_{\\text{hidden}} \\cdot d_v$ parameters.</p>
+                    <p>Lifted space: $\\tilde{W}_1(C) \\in \\mathbb{R}^{d_{\\text{hidden}} \\times D}$ has $d_{\\text{hidden}} \\cdot D$ parameters.</p>
+                    <p>Since $D = \\binom{d+N}{N}$ grows exponentially with degree $N$, ICL has access to exponentially more adaptation parameters!</p>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">2. Nonlinear Feature Interactions</h3>
+                    <p>Hinton's vision: $W_{\\text{slow}} + W_{\\text{fast}}(x)$ (additive)</p>
+                    <p>ICL reality: $W_{\\text{slow}} \\cdot A_{\\text{fast}}(C)$ operating on polynomial features (multiplicative + nonlinear)</p>
+
+                    <p>ICL can capture interactions like $x_i x_j$ that are impossible with simple weight addition.</p>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3">3. Context-Dependent Architecture</h3>
+                    <p>ICL doesn't just change weights—it changes the effective neural architecture through the polynomial feature selection encoded in $A(C)$.</p>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">The Softmax Extension</h2>
+                    <p>For softmax attention, we have:</p>
+                    $A_i(x, C) = \\frac{\\exp(x^T W_Q^T W_K c_i / \\tau)}{\\sum_j \\exp(x^T W_Q^T W_K c_j / \\tau)}$
+
+                    <p>Using Taylor expansion of exponentials:</p>
+                    $\\exp(z) \\approx 1 + z + \\frac{z^2}{2!} + \\frac{z^3}{3!} + \\cdots$
+
+                    <p>This gives us rational functions with higher-degree polynomials, requiring more polynomial features. The temperature $\\tau$ controls the approximation quality:</p>
+                    <ul>
+                        <li><strong>High $\\tau$</strong>: Nearly linear, few features needed</li>
+                        <li><strong>Low $\\tau$</strong>: Highly nonlinear, many features needed</li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4">The Bottom Line</h2>
+                    <p>Transformers didn't just fulfill Hinton's dream of fast and slow weights—they revolutionized it. Through the mathematical structure of attention operating in polynomial kernel space, they achieved:</p>
+
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li><strong>Computational efficiency</strong>: Batchable attention instead of per-sample weight computation</li>
+                        <li><strong>Exponential expressivity</strong>: Access to polynomial feature interactions</li>
+                        <li><strong>Dynamic architecture</strong>: Context-dependent neural pathway selection</li>
+                        <li><strong>Hardware optimization</strong>: Matrix operations optimized in modern accelerators</li>
+                    </ol>
+
+                    <p>The equation $\\tilde{W}_1(C) = W_1 A(C)$ with $A(C)$ computed via attention is the elegant solution to Hinton's decades-old challenge. It's mathematics at its most beautiful—solving an impossible computational problem through the right abstraction.</p>
+
+                    <hr class="my-8">
+                    <p class="text-sm text-gray-600 dark:text-gray-400"><em>This analysis reveals why in-context learning works so well: it's not just pattern matching, but genuine fast weight adaptation in exponentially high-dimensional polynomial feature space.</em></p>
                 `
             },
             '3': {
