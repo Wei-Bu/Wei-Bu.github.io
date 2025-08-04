@@ -110,25 +110,7 @@
         <section id="blog">
             <h2 class="text-3xl font-bold text-center mb-12 text-slate-900 dark:text-white">From My Blog</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Blog Post Card 1 -->
-                <div class="blog-post-card bg-white dark:bg-slate-800/50 rounded-lg shadow-md overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-transform" data-id="1">
-                    <img src="https://placehold.co/600x300/10b981/white?text=LaTeX" class="w-full h-48 object-cover" alt="Blog Post 1">
-                    <div class="p-6">
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">July 30, 2025</p>
-                        <h3 class="text-xl font-bold mb-2">Understanding Euler's Identity</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">A deep dive into one of the most beautiful equations in mathematics, using LaTeX for clarity...</p>
-                    </div>
-                </div>
-                <!-- Blog Post Card 2 -->
-                <div class="blog-post-card bg-white dark:bg-slate-800/50 rounded-lg shadow-md overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-transform" data-id="2">
-                    <img src="https://placehold.co/600x300/f43f5e/white?text=React" class="w-full h-48 object-cover" alt="Blog Post 2">
-                    <div class="p-6">
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">July 15, 2025</p>
-                        <h3 class="text-xl font-bold mb-2">Building a Reusable React Component Library</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Best practices for creating a flexible, scalable, and maintainable component library in React...</p>
-                    </div>
-                </div>
-                <!-- NEW Blog Post Card 3 - ICL -->
+                <!-- NEW Blog Post Card 1 - ICL -->
                 <div class="blog-post-card bg-white dark:bg-slate-800/50 rounded-lg shadow-md overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-transform" data-id="3">
                     <img src="https://placehold.co/600x300/8b5cf6/white?text=AI+Brain" class="w-full h-48 object-cover" alt="ICL Blog Post">
                     <div class="p-6">
@@ -160,24 +142,6 @@
         // --- EDIT YOUR BLOG POSTS HERE ---
         const blogPosts = {
     '1': {
-        title: "Understanding Euler's Identity",
-        content: `
-            <p>Euler's identity is often called the most beautiful equation in mathematics. It connects five fundamental mathematical constants in a single, elegant formula:</p>
-            $$ e^{i\pi} + 1 = 0 $$
-            <p>Let's break it down. It involves:</p>
-            <ul>
-                <li>$e$, Euler's number, the base of natural logarithms.</li>
-                <li>$i$, the imaginary unit, which satisfies $i^2 = -1$.</li>
-                <li>$\\pi$, the ratio of a circle's circumference to its diameter.</li>
-                <li>$1$, the multiplicative identity.</li>
-                <li>$0$, the additive identity.</li>
-            </ul>
-            <p>The proof stems from Euler's formula, which states that for any real number $x$, $e^{ix} = \\cos(x) + i\\sin(x)$. If we substitute $x = \\pi$, we get:</p>
-            $$ e^{i\\pi} = \\cos(\\pi) + i\\sin(\\pi) $$
-            <p>Since $\\cos(\\pi) = -1$ and $\\sin(\\pi) = 0$, the equation simplifies to $e^{i\\pi} = -1$, which rearranges to the famous identity.</p>
-        `
-    },
-    '2': {
         title: 'ICL: Fast Weights Through Kernel Space',
         content: `
             <h2 class="text-2xl font-bold mt-6 mb-4">The Problem Hinton Identified</h2>
